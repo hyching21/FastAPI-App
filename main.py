@@ -25,7 +25,7 @@ async def read_items(
 ):
     result = {
         "item_id": item_id,
-        "description": f"This is a sample item." if not q else f"This is a sample item that matches the query {q}.",
+        "description": f"This is a sample item." if not q else f"This is a sample item that matches the query {q}",
         "sort_order": sort_order
     }
     
