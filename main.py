@@ -109,7 +109,7 @@ async def extra_datatype(
     start_time: Annotated[datetime, Body()],
     end_time: Annotated[time, Body()],
     repeat_every: Annotated[timedelta, Body()],
-    process_id: UUID
+    process_id: Annotated[UUID, Body()]
 ):
     result = {
         "message": "This is an item with extra data types.",
