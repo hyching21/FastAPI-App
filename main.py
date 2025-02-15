@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Query, Path, Body, Cookie, Form, File, UploadFile, HTTPException
-from typing import Annotated
+from typing import Annotated, List
 from decimal import Decimal
 from pydantic import BaseModel, Field
 from datetime import datetime, time, timedelta
@@ -147,3 +147,32 @@ async def add_item_with_form_and_file(
         "filename": file.filename,
         "message": "This is an item created using form data and a file."
     }
+
+#  --- HW6 ---
+class Author(BaseModel):
+    name: str
+    age: int
+
+class Book(BaseModel):
+    title: str
+    author: Author
+    summary: str
+
+books_db = [
+    Book(title="Book 1", author=Author(name="Author 1", age=30), summary="Summary 1"),
+    Book(title="Book 2", author=Author(name="Author 2", age=40), summary="Summary 2")
+]
+
+@app.get("/books/", response_model=List[Book])
+async def get_books():
+    return books_db
+
+@app.post("/books/create_with_author/", response_model=Book)
+async def add_book_with_author(book: Book):
+    # books_db.append(book)
+    return book
+
+@app.post("/books/", response_model=Book, status_code=201)
+async def add_book(book: Book):
+    # books_db.append(book)
+    return book
