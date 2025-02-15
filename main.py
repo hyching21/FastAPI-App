@@ -128,7 +128,7 @@ async def read_from_cookies(
     return {"session_id": session_id, "message": "This is the session ID obtained from the cookies."}
 
 #  --- HW5 ---
-@app.post("/items/form_and_file")
+@app.post("/items/form_and_file/")
 async def add_item_with_form_and_file(
     name: Annotated[str, Form()],
     price: Annotated[float, Form()],
